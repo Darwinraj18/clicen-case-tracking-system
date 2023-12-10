@@ -1,0 +1,17 @@
+
+
+h1{
+background:linear-gradent(to bottom, #FFFFFF, #FFFFFF);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-align:center;
+}
+
+  body{
+  background:linear-gradient(to bottom, #29323c, #485563);
+  }
+table td {
+
+background:linear-gradient(to bottom, #C2C8C5, #C2C8C5);
+
+}
