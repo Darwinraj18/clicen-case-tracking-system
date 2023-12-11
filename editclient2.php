@@ -5,8 +5,8 @@
 <title>editclient</title></head>
 <body><BR><BR><BR>
 <style>
-  .a{
-text decoration:none;
+.a {
+    text-decoration: none;
 }
   </style>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF"<h1>EDIT CLIENT </h1></font>
