@@ -12,18 +12,41 @@
 <?php
 if(isset($_POST['view']))
 {
-$a=$_POST['client_id'];
-$b=$_POST['client_name'];
-$h=$_POST['address'];
-mysql_connect("localhost","root","darwin123");
-mysql_select_db("clientcase");
-$result=mysql_query("select * from client_register where client_id='$a'");
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		// Check if the expected keys exist in $_POST
+		$a = isset($_POST['client_id']) ? $_POST['client_id'] : "";
+		$b = isset($_POST['client_name']) ? $_POST['client_name'] : "";
+		$h = isset($_POST['address']) ? $_POST['address'] : "";
+	
+		// Validate and sanitize input if needed
+	
+		// Connect to the database using mysqli
+		$conn = new mysqli("localhost", "root", "", "clientcase");
+	
+		// Check the connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+	
+		// Use prepared statements to prevent SQL injection
+		$stmt = $conn->prepare("SELECT * FROM client_register WHERE client_id = ?");
+		$stmt->bind_param("s", $a);
+		$stmt->execute();
+		$result = $stmt->get_result();
+	
+		// Do something with the result, e.g., fetch data
+	
+		// Close the statement and connection
+		$stmt->close();
+		$conn->close();
+	}
+	
 
- while($row=mysql_fetch_array($result))
+	while ($row = $result->fetch_assoc()) 
   {
-  echo"<tr align='center'><td>clientid</td><td><input type='text'  name='client_id' value='".$row[0]."'></td></tr>
-        <tr align='center'><td>clientname</td><td><input type='text'  name='client_name' value='".$row[1]."'></td></tr>
-			<tr align='center'><td>address</td><td><input type='text'  name='address' value='".$row[7]."'></td></tr> 
+  echo"<tr align='center'><td>clientid</td><td><input type='text'  name='client_id' value='".$row['client_id']."'></td></tr>
+        <tr align='center'><td>clientname</td><td><input type='text'  name='client_name' value='".$row["client_name"]."'></td></tr>
+			<tr align='center'><td>address</td><td><input type='text'  name='address' value='".$row["address"]."'></td></tr> 
 			<tr align='center'>
 <td>case details</td>
 <td><input type='text' name='case_details'/></td>
